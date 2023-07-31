@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Новостюшки</title>
+    <style type="text/css">
+        .block1 { 
+        width: 70%; 
+        height: 200px;
+        background: #acd;
+        padding: 5px;
+        padding-right: 20px; 
+        border: solid 1px black; 
+        float: left;
+        }
+        .block2 { 
+        width: 50%; 
+        background: #bff; 
+        padding: 5px; 
+        border: solid 1px black; 
+        float: left; 
+        position: relative; 
+        top: 40px; 
+        left: 170px; 
+        }
+    </style>
+</head>
+<body>
+<div class="block1">
+    <h1 class="col-12 text-monospace text-center">Новости</h1>
+    {% for item in news %}
+    <div class="block2">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.text }}</p>
+        <p>{{ item.date }}</p>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
