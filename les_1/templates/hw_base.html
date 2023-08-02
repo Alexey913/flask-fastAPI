@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8"/>
+        <title>
+            {% block title %}
+                Красота спасет мир!
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <table border="1" align="center" rules="rows" style="width:100%;">
+            <tr>
+                <td>
+                    <table border="1" background="images/168.png" bgcolor="#7FFFD4"
+                            cellpadding="10" style="width:100%; border-radius:10px;">
+                        <tr>
+                            <th>
+                                <h1>Лучший сайт одежды</h1>
+                                <h3>Здесь можно посмотреть мое домашнее задание к семианру №1 по курсу Flask</h3>
+                            </th>
+                        </tr>
+                    </table>
+                    <table border="1" bgcolor="#e6e6fa" cellpadding="10" style="width:100%; border-radius:10px;">
+                        <tr>
+                            <td rowspan="2" style="width:80%">
+                                
+                                {% block content %}
+                                <h2>Содержимое страницы</h2>
+                                {% endblock %}
+        
+                            </td>
+                            <td bgcolor="#e6e6fa">
+                                <h3>Меню</h3>
+                                <p>
+                                    <a href="/">
+                                        <img src="/static/image/mark.png" width="21" height="25">
+                                        <span style="margin-left:15px;">Главная</span>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="/about/">
+                                        <img src="/static/image/mark.png" width="21" height="25">
+                                        <span style="margin-left:15px;">О нас</span>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="/clothes/">
+                                        <img src="/static/image/mark.png" width="21" height="25">
+                                        <span style="margin-left:15px;">Одежда</span>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="/shoes/">
+                                        <img src="/static/image/mark.png" width="21" height="25">
+                                        <span style="margin-left:15px;">Обувь</span>
+                                    </a>
+                                </p>
+                                {% block menu %}
+                                    <p>Дополнительное меню</p>
+                                {% endblock %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {% block advertisement %}
+                                    <p>Здесь расположится Ваша реклама</p>
+                                {% endblock %}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table border="1" bgcolor="#7FFFD4" height="100" cellpadding="10" style="width:100%; border-radius:10px;">
+                        <tr>
+                            <th>
+                                <h3>Все права защищаются прямо сейчас</h3>
+                            </th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

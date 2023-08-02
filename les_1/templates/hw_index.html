@@ -1,0 +1,19 @@
+{% extends 'hw_base.html' %}
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <h1 class="col-12 col-md-6 display-2">Привет, меня зовут Алексей</h1>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <p>Опа</p>
+{% endblock %}
+
+{% block advertisement %}
+        <h2>Рекламный блок</h2>
+        <p>Реклама стороннего ресурса</p>
+        <img src="/static/image/home.png" width="250" height="100">
+{% endblock %}
