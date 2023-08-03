@@ -1,1 +1,45 @@
 {% extends 'hw_base.html' %}
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <h2>Зимняя обувь</h2>
+        <hr color="#ffe500">
+        <p><font color = "#947b00">
+            <a href="/development/"> <li margin-left: 20px>Ботинки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Сапоги</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Угги</li> </a>
+            </font>
+        </p>
+        <hr color="#ffe500">
+        <hr color="#ffe500">
+        <h2>Демисезонная обувь</h2>
+        <hr color="#ffe500">
+        <p><font color = "#947b00">
+            <a href="/development/"> <li margin-left: 20px>Ботинки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Сапоги</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Туфли</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Кроссовки</li> </a>
+            </font>
+        </p>
+        <hr color="#ffe500">
+        <hr color="#ffe500">
+        <h2>Летняя обувь</h2>
+        <hr color="#ffe500">
+        <p><font color = "#947b00">
+            <a href="/development/"> <li margin-left: 20px>Туфли</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Кроссовки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Босоножки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Мокасины</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Сланцы</li> </a>     
+            </font>
+        </p>
+        <hr color="#ffe500">
+    </div>
+{% endblock %}
+
+{% block advertisement %}
+        <h2>Рекламная пауза для страницы с обувью</h2>
+        <img src="/static/image/home.png" width="250" height="100">
+{% endblock %}

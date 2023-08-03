@@ -1,0 +1,36 @@
+{% extends 'hw_base.html' %}
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+{% block content %}
+<style>
+    .sign {
+    float: left;
+    border: 1px solid #333;
+    padding: 7px; 
+    margin: 10px 0 5px 5px;
+    background: #bfbfbf;
+    color:rgb(8, 12, 107);
+   }
+   .sign figcaption {
+    margin: 0 auto 5px;
+   }
+</style>
+    <figure class="sign">
+        <a href="/jacket/"><img src="/static/image/roccoban.jpg" alt="Rockoban" width="200" height="200">
+        <figcaption align = "center"> 24 580 руб.</figcaption></a>
+    </figure>
+    <figure class="sign">
+        <a href="/development/"><img src="/static/image/boobjack.jpg" alt="Boobjack" width="200" height="200">
+        <figcaption align = "center"> 6 800 руб.</figcaption></a>
+    </figure>
+    <figure class="sign">
+        <a href="/development/"><img src="/static/image/huppa.jpg" alt="Huppa" width="200" height="200">
+        <figcaption align = "center"> 8 420 руб.</figcaption></a>
+    </figure>
+{% endblock %}
+
+{% block advertisement %}
+        <h2>Рекламная пауза для главной страницы</h2>
+        <img src="/static/image/home.png" width="250" height="100">
+{% endblock %}

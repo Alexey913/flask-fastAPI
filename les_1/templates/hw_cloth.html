@@ -1,1 +1,40 @@
 {% extends 'hw_base.html' %}
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <h2>Верхняя одежда</h2>
+        <hr color="#ffe500">
+        <p><font color = "#947b00">
+            <a href="/jackets/"> <li margin-left: 20px>Куртки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Пальто</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Шубы</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Дубленки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Плащи</li> </a>
+            </font>
+        </p>
+        <hr color="#ffe500">
+        <hr color="#ffe500">
+        <h2>Одежда</h2>
+        <hr color="#ffe500">
+        <p><font color = "#947b00">
+            <a href="/development/"> <li margin-left: 20px>Футболки и майки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Брюки и джинсы</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Юбки и платья</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Рубашки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Одежда для спорта</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Свитеры, толстовки, водолазки</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Пиджаки, костюмы, жакеты</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Нижнее белье</li> </a>
+            <a href="/development/"> <li margin-left: 20px>Пляжная одежда</li> </a>
+            </font>
+        </p>
+        <hr color="#ffe500">
+    </div>
+{% endblock %}
+
+{% block advertisement %}
+        <h2>Рекламная пауза для страницы с одеждой</h2>
+        <img src="/static/image/home.png" width="250" height="100">
+{% endblock %}

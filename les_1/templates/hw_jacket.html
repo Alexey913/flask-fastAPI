@@ -1,1 +1,51 @@
 {% extends 'hw_base.html' %}
+{% block title %}
+{{ super() }} - {{ title }}
+{% endblock %}
+{% block content %}
+    <style>
+        .sign {
+        float: left;
+        border: 1px solid #333;
+        padding: 7px; 
+        margin: 10px 0 5px 5px;
+        background: #bfbfbf;
+        color:rgb(8, 12, 107);
+    }
+    .sign figcaption {
+        margin: 0 auto 5px;
+    }
+    </style>
+    <table cellspacing="5" cellpadding="10" width="100%">
+        <tr>
+            <td valign="top">
+                <figure class="sign">
+                    <a href="/jacket/"><img src="/static/image/roccoban.jpg" alt="Rockoban" width="350" height="500">
+                    <figcaption align = "center"> Куртка Roccoban</figcaption></a>
+                </figure>
+            </td>
+            <td valign="top">
+                <h1 class="col-12 col-md-6 display-2">Roccoban</h1>
+                <h3>А здесь будут преимущества и параметры</h3>
+                <hr color="#ffe500">
+                <p><font color = "#947b00">
+                    <li>Кожаная</li>
+                    <li>С рукавами</li>
+                    <li>Есть карманы</li>
+                    <li>Есть разные размеры</li>
+                    <li>В общем, мировая куртка</li>
+                    </font>
+                </p>
+                <p align = "right"><font size = "20" color = "#000">
+                    24 580 руб.
+                    </font>
+                </p>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block advertisement %}
+        <h2>А здесь можно прорекламировать похожую куртку</h2>
+        <img src="/static/image/huppa.jpg" width="200" height="200">
+{% endblock %}
