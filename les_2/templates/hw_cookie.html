@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/css/flash_style.css">
+    <h2>Введите имя пользователя и e-mail</h2>
+    <hr color="#ffe500">
+    <form action="/hw_cookie" method="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <div class="icon__wrapper">
+                        <span class="mdi mdi-alert-outline"></span>
+                        </div>
+                        {{ message }}
+                        <span class="mdi mdi-open-in-new open"></span>
+                        <span class="mdi mdi-close close"></span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <table>
+            <tr>
+                <td>
+                    Имя пользователя:
+                </td>
+                <td>
+                    <input type="text" name="username">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    E-mail:
+                </td>
+                <td>
+                    <input type="email" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Отправить">
+                </td>
+                <td>
+                    Нажми на кнопку для отправки
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

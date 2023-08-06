@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div align="center">
+    <a href="{{ url_for('hello') }}">
+        <button type = "submit">
+            Нажми меня
+        </button>
+    </a>
+
+    <a href="{{ url_for('imgload') }}">
+        <button type = "submit">
+            Загрузи картинку
+        </button>
+    </a>
+
+    <a href="{{ url_for('login') }}">
+        <button type = "submit">
+            Форма входа
+        </button>
+    </a>
+
+    <a href="{{ url_for('count_words') }}">
+        <button type = "submit">
+            Подсчет слов в строке
+        </button>
+    </a>
+
+    <a href="{{ url_for('calculator') }}">
+        <button type = "submit">
+            Калькулятор
+        </button>
+    </a>
+
+    <a href="{{ url_for('check_age') }}">
+        <button type = "submit">
+            Проверка возраста
+        </button>
+    </a>
+
+    <a href="{{ url_for('redirect_page') }}">
+        <button type = "submit">
+            Перенаправление
+        </button>
+    </a>
+    <a href="{{ url_for('flash_message') }}">
+        <button type = "submit">
+            Флэш-сообщения
+        </button>
+    </a>
+    <a href="{{ url_for('hw_session') }}" style="border: 5px solid rgb(14, 189, 58);">
+        <button type = "submit">
+            Сессии
+        </button>
+    </a>
+</div>
+{% endblock %}
+
+{% block advertisement %}
+    {% if autorization %}
+        <p>
+            Привет, {{ autorization }}!<br>
+            <a href="{{ url_for('login_session') }}">Перейти в личный кабинет</a>
+        </p>
+    {% else %}
+        <p>
+            Вы не авторизованы!<br>
+            <a href="{{ url_for('hw_session') }}">Перейти на страницу входа</a>
+        </p>
+    {% endif %}    
+
+{% endblock %}

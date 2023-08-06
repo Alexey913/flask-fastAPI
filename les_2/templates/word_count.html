@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Введите строку</h2>
+    <hr color="#ffe500">
+    <form method="post">
+        <textarea name="text" placeholder="Введите текст" rows="5" cols="30"></textarea>
+        <p>
+            <input type="submit" value="Отправить">
+        </p>
+    </form>
+{% endblock %}

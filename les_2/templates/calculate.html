@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Введите имя пользователя и пароль</h2>
+    <hr color="#ffe500">
+    <form method="post">
+        <p>
+            Первое число &nbsp; <input type="number" name="number_1">
+        </p>
+        <p>
+            Второе число &nbsp; <input type="number" name="number_2">
+        </p>
+        <p>
+            <select id="operation" name="operation">
+                <option value="Сумма">+</option>
+                <option value="Разность">-</option>
+                <option value="Произведение">*</option>
+                <option value="Частное">/</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Вычислить">
+        </p>
+    </form>
+{% endblock %}

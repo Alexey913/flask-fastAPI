@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Результат исследования</h2>
+    <hr color="#ffe500">
+    <form method="post">
+        <p align="center">
+            <h1>В строке" {{ string }} " мы насчитали {{ count }} слов(а).</h1>
+        </p>
+    </form>
+{% endblock %}

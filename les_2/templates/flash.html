@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/flash_style.css">
+    <h2>Введите свое имя</h2>
+    <hr color="#ffe500">
+    <form action="/flash" method="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <div class="icon__wrapper">
+                        <span class="mdi mdi-alert-outline"></span>
+                        </div>
+                        {{ message }}
+                        <span class="mdi mdi-open-in-new open"></span>
+                        <span class="mdi mdi-close close"></span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <p>
+            Введите имя &nbsp; <input type="text" name="username">
+        </p>
+        <p>
+            <input type="submit" value="Отправить">
+        </p>
+    </form>
+{% endblock %}

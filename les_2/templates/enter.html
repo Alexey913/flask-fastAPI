@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Введите имя пользователя и пароль</h2>
+    <hr color="#ffe500">
+    <form method="post">
+        <p align="right">
+            Имя пользователя &nbsp; <input type="text" name="login">
+        </p>
+        <p align="right">
+            Пароль <input type="password" name="password">
+        </p>
+        <p align="right">
+            <input type="submit" value="Отправить">
+        </p>
+    </form>
+{% endblock %}
