@@ -198,7 +198,44 @@ def flash_message():
 # пользователя и произведено перенаправление на страницу
 # ввода имени и электронной почты.
 
+# Для cookie
+@app.route("/hw_cookie/", methods=['GET', 'POST'])
+def hw_cookie():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        if username != "" and email != "":
+            response = make_response(redirect(url_for('login_cookie', username=username, email=email)))
+            response.set_cookie('username', username)
+            response.set_cookie('email', email)
+            return response
+        if username == "":
+            flash(f' Введите имя!', 'error')
+            return redirect(url_for('hw_cookie'))
+        if email == "":
+            flash(f' Введите e-mail!', 'error')
+            return redirect(url_for('hw_cookie'))
+    return render_template('hw_cookie.html', title="cookie-файлы")
 
+@app.route("/login_cookie/", methods=['GET', 'POST'])
+def login_cookie():
+    username = request.args.get('username')
+    email = request.args.get('email')
+    if request.method == 'POST':
+        return redirect(url_for('logout_cookie', username=username, email=email))
+    return render_template('login_cookie.html', name = username, email = email, title="Личный кабинет cookie")
+
+@app.route("/logout_cookie/")
+def logout_cookie():
+    username = request.cookies.get('username')
+    email = request.cookies.get('email')
+    response = make_response(redirect(url_for('login_cookie', username=username, email=email)))
+    response.set_cookie("username", "", 0)
+    response.set_cookie("email", "", 0)
+    return make_response(redirect(url_for('hw_cookie')))
+
+
+# Для сессии
 @app.route("/hw_session/", methods=['GET', 'POST'])
 def hw_session():
     if request.method == 'POST':
@@ -222,14 +259,14 @@ def hw_session():
 @app.route("/login_session/", methods=['GET', 'POST'])
 def login_session():
     if request.method == 'POST':
-        # session.pop('username', None)
         return redirect(url_for('logout_session'))
-    return render_template('login_session.html', name = session['username'], email = session['email'], title="Личный кабинет")
+    return render_template('login_session.html', name = session['username'], email = session['email'], title="Личный кабинет в сессии")
 
 
 @app.route("/logout_session/")
 def logout_session():
     session.pop('username', None)
+    session.pop('email', None)
     return redirect(url_for('hw_session'))
 
 
