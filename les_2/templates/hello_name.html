@@ -5,13 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Ну, здравствуй, {{ name }}!</h2>
-    <h2>Мне тоже когда-то было {{ age }}</h2>
+    <h2>Ну, здравствуй, {{ username }}!</h2>
     <hr color="#ffe500">
 {% endblock %}
 
 {% block enter_2 %}
-    <a href="{{ url_for('check_age') }}">
+    <a href="{{ url_for('hello') }}">
         <button type = "submit">
             Назад
         </button>

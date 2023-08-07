@@ -14,18 +14,28 @@ app.secret_key = b'48144ee52bd3424f2daf85dceb41e26eab86f99fcd47206bbd681243c8eae
 @app.route("/")
 def index():
     if 'username' in session:
-        aut = session['username']
+        aut_session = session['username']
     else:
-        aut = None
-    return render_template("index.html", title="Главное меню", autorization=aut)
+        aut_session = None
+    if request.cookies.get('username'):
+        aut_cookie = request.cookies.get('username')
+    else:
+        aut_cookie = None
+    return render_template("index.html", title="Главное меню", autorization_session=aut_session, autorization_cookie=aut_cookie)
 
 
 # Создать страницу, на которой будет кнопка "Нажми меня", при
 # нажатии на которую будет переход на другую страницу с
 # приветствием пользователя по имени.
 
-@app.route("/hellotion/")
+@app.route("/hello/", methods=['GET', 'POST'])
 def hello():
+    if request.method == 'POST':
+        if request.form.get('username'):
+            username = request.form.get('username')
+        else:
+            username = "дружище"
+        return render_template("hello_name.html", title=f"Ну, здравствуй, {username}", username=username)
     return render_template("hello.html", title="Приветствие")
 
 
@@ -63,10 +73,8 @@ def login():
         password = request.form.get('password')
         if (username, password) in users.items():
             return render_template('enter_sucsess.html', file_name=username, title="Успешный вход")
-
         else:
             return render_template('enter_error.html', file_name=username, title="Ошибка входа")
-
     return render_template("enter.html", title="Введите логин и пароль")
 
 
@@ -182,7 +190,7 @@ def flash_message():
         if username.isalpha():
             flash(f' Привет, {username}!', 'success')
             return redirect(url_for('flash_message'))
-        flash(f'Я не знаю такого имени!','error')
+        flash(f'Я не знаю такого имени!', 'error')
         return redirect(url_for('flash_message'))
     return render_template('flash.html', title="Флэш-сообщения")
 
@@ -205,7 +213,7 @@ def hw_cookie():
         username = request.form.get('username')
         email = request.form.get('email')
         if username != "" and email != "":
-            response = make_response(redirect(url_for('login_cookie', username=username, email=email)))
+            response = make_response(redirect(url_for('login_cookie')))
             response.set_cookie('username', username)
             response.set_cookie('email', email)
             return response
@@ -217,22 +225,23 @@ def hw_cookie():
             return redirect(url_for('hw_cookie'))
     return render_template('hw_cookie.html', title="cookie-файлы")
 
+
 @app.route("/login_cookie/", methods=['GET', 'POST'])
 def login_cookie():
-    username = request.args.get('username')
-    email = request.args.get('email')
+    username = request.cookies.get('username')
+    email = request.cookies.get('email')
     if request.method == 'POST':
         return redirect(url_for('logout_cookie', username=username, email=email))
-    return render_template('login_cookie.html', name = username, email = email, title="Личный кабинет cookie")
+    return render_template('login_cookie.html', name=username, email=email, title="Личный кабинет cookie")
+
 
 @app.route("/logout_cookie/")
 def logout_cookie():
-    username = request.cookies.get('username')
-    email = request.cookies.get('email')
-    response = make_response(redirect(url_for('login_cookie', username=username, email=email)))
-    response.set_cookie("username", "", 0)
-    response.set_cookie("email", "", 0)
-    return make_response(redirect(url_for('hw_cookie')))
+    response = make_response(redirect(url_for('hw_cookie')))
+    response.set_cookie('username', "", max_age=0)
+    response.set_cookie('email', "", max_age=0)
+    print(request.cookies.get('username'))
+    return response
 
 
 # Для сессии
@@ -243,7 +252,7 @@ def hw_session():
         email = request.form.get('email')
         if username != "" and email != "":
             session['username'] = username
-            session['email'] =  email
+            session['email'] = email
             return redirect(url_for('login_session'))
         if username == "":
             flash(f' Введите имя!', 'error')
@@ -254,13 +263,11 @@ def hw_session():
     return render_template('hw_session.html', title="session-файлы")
 
 
-
-
 @app.route("/login_session/", methods=['GET', 'POST'])
 def login_session():
     if request.method == 'POST':
         return redirect(url_for('logout_session'))
-    return render_template('login_session.html', name = session['username'], email = session['email'], title="Личный кабинет в сессии")
+    return render_template('login_session.html', name=session['username'], email=session['email'], title="Личный кабинет в сессии")
 
 
 @app.route("/logout_session/")

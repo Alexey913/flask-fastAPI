@@ -71,11 +71,16 @@
                                     <hr color="#ffe500">
                                 {% endblock %}
                             </td>
+                            <td class="gradient_menu">
+                                {% block enter_1 %}
+                                    <a href="{{ url_for('index') }}">Здесь можно вернуться на главную страницу</a>
+                                {% endblock %}
+                            </td>
                         </tr>
                         <tr>
                             <td class="gradient_menu">
-                                {% block advertisement %}
-                                    <a href="{{ url_for('index') }}">Здесь можно вернуться на главную страницу</a>
+                                {% block enter_2 %}
+                                    <hr color="#ffe500">
                                 {% endblock %}
                             </td>
                         </tr>

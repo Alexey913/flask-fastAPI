@@ -8,3 +8,11 @@
     <hr color="#ffe500">
     <h2>{{ oper }} чисел {{ num_1 }} и {{ num_2 }} составляет {{ res }}</h2>
 {% endblock %}
+
+{% block enter_2 %}
+    <a href="{{ url_for('calculator') }}">
+        <button type = "submit">
+            Назад
+        </button>
+    </a>
+{% endblock %}
