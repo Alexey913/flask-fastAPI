@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Введите имя пользователя и пароль</h2>
+    <hr color="#ffe500">
+    <form method="post">
+        <table cellpadding="5px">
+            <tr>
+                <td>
+                    Имя пользователя:
+                </td>
+                <td>
+                    <input type="text" name="login">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Пароль:
+                </td>
+                <td>
+                    <input type="password" name="password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Отправить">
+                </td>
+                <td>
+                    Нажми на кнопку для отправки
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+
+{% block enter_2 %}
+    <h2>Условие</h2>
+    Создать страницу, на которой будет форма для ввода логина
+    и пароля
+    При нажатии на кнопку "Отправить" будет произведена
+    проверка соответствия логина и пароля и переход на
+    страницу приветствия пользователя или страницу с
+    ошибкой.
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <hr color="#ffe500">
+    <form method="post">
+        <p>
+            Введи свое имя &nbsp; <input type="text" name="username">
+        </p>
+        <p>
+            <input type="submit" value="Нажми меня!">
+        </p>
+    </form>
+{% endblock %}
+
+
+{% block enter_2 %}
+    <h2>Условие</h2>
+    Создать страницу, на которой будет кнопка "Нажми меня", при
+    нажатии на которую будет переход на другую страницу с
+    приветствием пользователя по имени.
+{% endblock %}

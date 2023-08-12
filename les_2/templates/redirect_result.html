@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Квадрат числа {{ number }} равен {{ result }}</h2>
+    <hr color="#ffe500">
+{% endblock %}
+
+{% block enter_2 %}
+    <a href="{{ url_for('redirect_page') }}">
+        <button type = "submit">
+            Назад
+        </button>
+    </a>
+{% endblock %}

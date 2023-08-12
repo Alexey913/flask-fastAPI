@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Загрузи картинку!</h2>
+    <hr color="#ffe500">
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Загружай!">
+    </form>
+{% endblock %}
+
+
+{% block enter_2 %}
+    <h2>Условие</h2>
+    Создать страницу, на которой будет изображение и ссылка
+    на другую страницу, на которой будет отображаться форма
+    для загрузки изображений.
+{% endblock %}

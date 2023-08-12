@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div align="center">
+    <a href="{{ url_for('hello') }}">
+        <button type = "submit">
+            Приветствие
+        </button>
+    </a>
+
+    <a href="{{ url_for('imgload') }}">
+        <button type = "submit">
+            Загрузи картинку
+        </button>
+    </a>
+
+    <a href="{{ url_for('login') }}">
+        <button type = "submit">
+            Форма входа
+        </button>
+    </a>
+
+    <a href="{{ url_for('count_words') }}">
+        <button type = "submit">
+            Подсчет слов в строке
+        </button>
+    </a>
+
+    <a href="{{ url_for('calculator') }}">
+        <button type = "submit">
+            Калькулятор
+        </button>
+    </a>
+
+    <a href="{{ url_for('check_age') }}">
+        <button type = "submit">
+            Проверка возраста
+        </button>
+    </a>
+
+    <a href="{{ url_for('redirect_page') }}">
+        <button type = "submit">
+            Перенаправление
+        </button>
+    </a>
+    <a href="{{ url_for('flash_message') }}">
+        <button type = "submit">
+            Флэш-сообщения
+        </button>
+    </a>
+</div>
+<hr color="#ffe500">
+<hr color="#ffe500">
+<div align = "center">
+    <a href="{{ url_for('hw_cookie') }}" >
+        <button type = "submit">
+            Cookie-файлы
+        </button>
+    </a>
+    <a href="{{ url_for('hw_session') }}">
+        <button type = "submit">
+            Сессии
+        </button>
+    </a>
+</div>
+<hr color="#ffe500">
+
+{% endblock %}
+
+{% block enter_1 %}
+    {% if autorization_session %}
+        <p>
+            Привет, {{ autorization_session }}!<br>
+            <a href="{{ url_for('login_session') }}">Перейти в личный кабинет сессии</a>
+        </p>
+    {% else %}
+        <p>
+            Вы не авторизованы в сессии!<br>
+            <a href="{{ url_for('hw_session') }}">Перейти на страницу входа в сессию</a>
+        </p>
+    {% endif %}    
+{% endblock %}
+
+{% block enter_2 %}
+    {% if autorization_cookie %}
+        <p>
+            Привет, {{ autorization_cookie }}!<br>
+            <a href="{{ url_for('login_cookie') }}">Перейти в личный кабинет по cookie</a>
+        </p>
+    {% else %}
+        <p>
+            Вы не авторизованы по cookie!<br>
+            <a href="{{ url_for('hw_cookie') }}">Перейти на страницу входа по cookie</a>
+        </p>
+    {% endif %}    
+{% endblock %}

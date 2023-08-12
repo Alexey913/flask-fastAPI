@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<hr color="#ffe500">
+<div class="row">
+    <p class="col-12">Доступ запрещен! Ты еще слишком мал!<br>
+<a href="{{ url_for('index') }}">Попробуйте вернуться на главную, там есть другие интересные штуки</a>
+</p>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h2>Загрузи картинку!</h2>
+    <hr color="#ffe500">
+    <!-- <img src="{{ url_for('static', filename='image/foto.jpg') }}" alt="Моё фото" style='width: 50%; height: auto;'> -->
+    <img src="/static/image/{{ file_name }}" alt="Это загруженное изображение" style='width: 80%; height: auto;'>
+    <br>
+{% endblock %}
+
+{% block enter_2 %}
+    <a href="{{ url_for('imgload') }}">
+        <button type = "submit">
+            Назад
+        </button>
+    </a>
+{% endblock %}

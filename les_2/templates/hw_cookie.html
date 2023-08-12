@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="/static/css/flash_style.css">
+    <h2>Введите имя пользователя и e-mail</h2>
+    <hr color="#ffe500">
+    <form action="/hw_cookie" method="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <div class="icon__wrapper">
+                        <span class="mdi mdi-alert-outline"></span>
+                        </div>
+                        {{ message }}
+                        <span class="mdi mdi-open-in-new open"></span>
+                        <span class="mdi mdi-close close"></span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <table cellpadding="7px">
+            <tr>
+                <td>
+                    Имя пользователя:
+                </td>
+                <td>
+                    <input type="text" name="username">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    E-mail:
+                </td>
+                <td>
+                    <input type="email" name="email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Отправить">
+                </td>
+                <td>
+                    Нажми на кнопку для отправки
+                </td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+{% block enter_2 %}
+    <h2>Условие</h2>
+    Создать страницу, на которой будет форма для ввода имени
+    и электронной почты
+    При отправке которой будет создан session файл с данными
+    пользователя
+    Также будет произведено перенаправление на страницу
+    приветствия, где будет отображаться имя пользователя.
+    На странице приветствия должна быть кнопка "Выйти"
+    При нажатии на кнопку будет удален session файл с данными
+    пользователя и произведено перенаправление на страницу
+    ввода имени и электронной почты.
+    <h3>Реализация для cookie-файлов</h3>
+{% endblock %}
