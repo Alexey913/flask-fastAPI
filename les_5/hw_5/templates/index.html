@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div align="center">
+    <table border="2" width="70%" cellpadding="5">
+        <tr>
+            <td>ID</td>
+            <td>Имя</td>
+            <td>E-mail</td>
+            <td> Удаление</td>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+            <form method=""post></from>
+                <input name="user_id" type="hidden" value = "{{ user.id }}">
+                <button type = "submit">Удалить</button>
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+<hr color="#ffe500">
+    
+{% endblock %}
