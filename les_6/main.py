@@ -20,6 +20,7 @@ from db import db
 from fastapi import FastAPI
 import uvicorn
 import user
+import post
 
 
 app = FastAPI()
@@ -35,7 +36,7 @@ async def shutdown():
 
 
 app.include_router(user.route, tags=['Users'])
-
+app.include_router(post.route, tags=['Posts'])
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
