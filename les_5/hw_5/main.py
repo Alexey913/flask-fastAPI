@@ -40,30 +40,74 @@ class UserIn(BaseModel):
     email: str
     password: str
 
+
 class User(UserIn):
     id: int
-   
-
-users = [User(id=1, name='name',email='e@m.ru', password='111111')]
 
 
-@app.get('/', response_class=HTMLResponse, summary="Вывод списка пользователей", tags=['Списки'])
+users = []
+
+# Динамический шаблон HTML
+@app.get('/users', response_class=HTMLResponse, summary="Вывод списка пользователей", tags=['HTML'])
 async def get_users(request: Request):
     logger.info('Отработал GET-запрос на вывод пользователей')
     return templates.TemplateResponse("index.html", {"request": request, "users": users})
 
 
-@app.post("/create_users/", response_model=User, summary="Добавление пользователя", tags=['Users'])
-async def create_user(user: UserIn):
+@app.post("/users", response_class=HTMLResponse, summary="Удаление пользователя по id", tags=['HTML'])
+async def delete_user(request: Request, user_id: int = Form()):
+    for user in users:
+        if user.id == user_id:
+            users.remove(user)
+            logger.info(
+                f'Отработал DELETE-запрос для задачи user_id = {user_id}')
+            break
+    return templates.TemplateResponse("index.html", {"request": request, "users": users})
+
+
+@app.get("/users/add", response_class=HTMLResponse, summary="Добавление пользователя", tags=['HTML'])
+def add_user(request: Request):
+    return templates.TemplateResponse("add_user.html", {"request": request})
+
+
+@app.post("/create_user", response_class=HTMLResponse, summary="Создание пользователя", tags=['HTML'])
+async def create_user(request: Request):
+    data = await request.form()
+    id = len(users) + 1
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+    if name == None:
+        name = email
+    new_user = User(
+        id=id,
+        name=name,
+        email=email,
+        password=password,
+    )
+    users.append(new_user)
+    logger.info(f'Отработал POST-запрос, добавлен пользователь {name}')
+    return templates.TemplateResponse('add_sucsess.html', {"request": request})
+
+
+# API
+@app.get('/', response_model=list[User], summary="Вывод списка пользователей", tags=['Users'])
+async def all_users():
+    logger.info('Отработал GET-запрос на вывод пользователей')
+    return users
+
+
+@app.post("/add_new_user/", response_model=User, summary="Добавление пользователя", tags=['Users'])
+async def add_new_user(user: UserIn):
     id = len(users) + 1
     if user.name == None:
         name = user.email
     else:
         name = user.name
     new_user = User(
-        id = id,
-        name = name,
-        email = user.email,
+        id=id,
+        name=name,
+        email=user.email,
         password=user.password,
     )
     users.append(new_user)
@@ -79,7 +123,7 @@ async def find_user(user_id: int):
             return user
 
 
-@app.put("/users/{user_id}", response_model=User, summary="Изменение пользователя по id", tags=['Users'])
+@app.put("/users/{user_id}", response_model=User, summary="Изменение данных пользователя", tags=['Users'])
 async def update_user(user_id: int, new_user: UserIn):
     for user in users:
         if user.id == user_id:
@@ -91,14 +135,14 @@ async def update_user(user_id: int, new_user: UserIn):
     raise HTTPException(status_code=404, detail="user not found")
 
 
-@app.delete("/users/", response_class=HTMLResponse, summary="Удаление пользователя по id", tags=['Users'])
-async def delete_user(request: Request, user_id: int = Form(...)):
+@app.delete("/users/{user_id}", summary="Удаление пользователя", tags=['Users'])
+async def delete_user_for_id(user_id: int):
     for user in users:
         if user.id == user_id:
             users.remove(user)
-            logger.info(f'Отработал DELETE-запрос для задачи user_id = {user_id}')
-    return templates.TemplateResponse("index.html", {"request": request, "users": users})
-
+            logger.info(
+                f'Отработал DELETE-запрос для задачи user_id = {user_id}')
+    return {"user_id": user_id}
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
