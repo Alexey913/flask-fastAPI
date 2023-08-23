@@ -17,7 +17,7 @@ route = APIRouter()
 
 
 # Добавление тестовых пользователей
-@route.get("/fake_users/{count}")
+@route.get("/fake_users/{count}", summary='Добавление тестовых пользователей')
 async def create_note(count: int):
     for i in range(count):
         query = users.insert().values(username=f'user{i}',
@@ -29,7 +29,7 @@ async def create_note(count: int):
 
 
 # Создание пользователя
-@route.post("/users/", response_model=User)
+@route.post("/users/", response_model=User, summary='Создание пользователя')
 async def create_user(user: UserIn):
     query = users.insert().values(username=user.username,
                                   usersurname=user.usersurname,
@@ -40,21 +40,21 @@ async def create_user(user: UserIn):
 
 
 # Вывод всех пользователей
-@route.get("/users/", response_model=List[User])
+@route.get("/users/", response_model=List[User], summary='Вывод списка пользователей')
 async def read_users():
     query = users.select()
     return await db.fetch_all(query)
 
 
 # Вывод конкретного пользователя
-@route.get("/users/{user_id}", response_model=User)
+@route.get("/users/{user_id}", response_model=User, summary='Поиск пользователя по id')
 async def read_user(user_id: int):
     query = users.select().where(users.c.id == user_id)
     return await db.fetch_one(query)
 
 
 # Обновление пользователя
-@route.put("/users/{user_id}", response_model=User)
+@route.put("/users/{user_id}", response_model=User, summary='Обновление пользователя по id')
 async def update_user(user_id: int, new_user: UserIn):
     query = users.update().where(users.c.id == user_id).values(**new_user.model_dump())
     await db.execute(query)
@@ -62,7 +62,7 @@ async def update_user(user_id: int, new_user: UserIn):
 
 
 # Удаление пользователя
-@route.delete("/users/{user_id}")
+@route.delete("/users/{user_id}", summary='Удаление пользователя по id')
 async def delete_user(user_id: int):
     query = users.delete().where(users.c.id == user_id)
     await db.execute(query)

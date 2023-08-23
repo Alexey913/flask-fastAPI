@@ -17,7 +17,7 @@ route = APIRouter()
 
 
 # Добавление тестовых товаров
-@route.get("/fake_goods/{count}")
+@route.get("/fake_goods/{count}", summary='Создание тестовых товаров')
 async def create_note(count: int):
     for i in range(count):
         query = goodses.insert().values(title=f'goods{i}',
@@ -29,7 +29,7 @@ async def create_note(count: int):
 
 
 # Создание товара
-@route.post("/goodses/", response_model=Goods)
+@route.post("/goodses/", response_model=Goods, summary='Создание товара')
 async def create_goods(goods: GoodsIn):
     query = goodses.insert().values(title=goods.title,
                                   description=goods.description,
@@ -39,21 +39,21 @@ async def create_goods(goods: GoodsIn):
 
 
 # Вывод всех товаров
-@route.get("/goodses/", response_model=List[Goods])
+@route.get("/goodses/", response_model=List[Goods], summary='Вывод списка товаров')
 async def read_goodses():
     query = goodses.select()
     return await db.fetch_all(query)
 
 
 # Вывод конкретного товара
-@route.get("/goodses/{goods_id}", response_model=Goods)
+@route.get("/goodses/{goods_id}", response_model=Goods, summary='Поиск товара по id')
 async def read_goods(goods_id: int):
     query = goodses.select().where(goodses.c.id == goods_id)
     return await db.fetch_one(query)
 
 
 # Обновление товара
-@route.put("/goodses/{goods_id}", response_model=Goods)
+@route.put("/goodses/{goods_id}", response_model=Goods, summary='Обновление товара по id')
 async def update_goods(goods_id: int, new_goods: GoodsIn):
     query = goodses.update().where(goodses.c.id == goods_id).values(**new_goods.model_dump())
     await db.execute(query)
@@ -61,7 +61,7 @@ async def update_goods(goods_id: int, new_goods: GoodsIn):
 
 
 # Удаление товара
-@route.delete("/goodses/{goods_id}")
+@route.delete("/goodses/{goods_id}", summary='Удаление товара по id')
 async def delete_goods(goods_id: int):
     query = goodses.delete().where(goodses.c.id == goods_id)
     await db.execute(query)

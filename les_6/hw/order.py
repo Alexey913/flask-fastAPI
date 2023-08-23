@@ -20,7 +20,7 @@ route = APIRouter()
 
 
 # Создание заказа
-@route.post("/orders/", response_model=dict)
+@route.post("/orders/", response_model=dict, summary='Создание заказа')
 async def create_order(order: OrderIn):
     query = orders.insert().values(user_id=order.user_id,
                                    goods_id=order.goods_id,
@@ -32,16 +32,16 @@ async def create_order(order: OrderIn):
 
 
 # Вывод всех заказов
-@route.get("/orders/", response_model=list[Order])
+@route.get("/orders/", response_model=list[Order], summary='Вывод списка заказов')
 async def get_orders():
     query = select(
              orders.c.id, orders.c.status, orders.c.date,
              users.c.id.label("user_id"),
              users.c.username, users.c.usersurname,
              users.c.email, users.c.password,
-            #  goodses.c.id.label("goods_id"),
-            #  goodses.c.title, goodses.c.description, goodses.c.price
-                   ).join(users)
+             goodses.c.id.label("goods_id"),
+             goodses.c.title, goodses.c.description, goodses.c.price,
+                   ).join(users).join(goodses)
     rows = await db.fetch_all(query)
     return [Order(id=row.id,
                   user=User(id=row.user_id,
@@ -50,15 +50,10 @@ async def get_orders():
                             email=row.email,
                             password=row.password
                             ),
-                #   goods=Goods(id=row.goods_id,
-                #               title=row.title,
-                #               description=row.description,
-                #               price=row.price
-                #               ),
-                  goods=Goods(id=1,
-                              title="ooooo",
-                              description="pppp",
-                              price=20000.0
+                  goods=Goods(id=row.goods_id,
+                              title=row.title,
+                              description=row.description,
+                              price=row.price
                               ),
                   date=row.date,
                   status=row.status
@@ -66,23 +61,23 @@ async def get_orders():
                   for row in rows]
 
 # Вывод конкретного заказа
-@route.get("/orders/{order_id}", response_model=Order)
+@route.get("/orders/{order_id}", response_model=Order, summary='Поиск заказа по id')
 async def read_order(order_id: int):
     query = orders.select().where(orders.c.id == order_id)
     return await db.fetch_one(query)
 
 
 # Обновление заказа
-@route.put("/orders/{order_id}", response_model=Order)
+@route.put("/orders/{order_id}", response_model=dict, summary='Обновление заказа по id')
 async def update_order(order_id: int, new_order: OrderIn):
     query = orders.update().where(
         orders.c.id == order_id).values(**new_order.model_dump())
     await db.execute(query)
-    return {**new_order.model_dump(), "id": order_id}
+    return {"id": order_id, **new_order.model_dump()}
 
 
 # Удаление заказа
-@route.delete("/orders/{order_id}")
+@route.delete("/orders/{order_id}", summary='Удаление заказа по id')
 async def delete_order(order_id: int):
     query = orders.delete().where(orders.c.id == order_id)
     await db.execute(query)
