@@ -44,10 +44,8 @@ class UserIn(BaseModel):
 class User(UserIn):
     id: int
 
-
 users = []
 
-# Динамический шаблон HTML
 @app.get('/users', response_class=HTMLResponse, summary="Вывод списка пользователей", tags=['HTML'])
 async def get_users(request: Request):
     logger.info('Отработал GET-запрос на вывод пользователей')
@@ -143,6 +141,7 @@ async def delete_user_for_id(user_id: int):
             logger.info(
                 f'Отработал DELETE-запрос для задачи user_id = {user_id}')
     return {"user_id": user_id}
+
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
