@@ -22,3 +22,12 @@ class User(BaseModel):
     username: str = Field(title='Имя пользователя',min_length=2, max_length=30)
     email: str = Field(title='E-mail')
     password: str = Field(title = "Пароль", min_length=6)
+
+class PostIn(BaseModel):
+    user_id: int
+    post: str
+
+class Post(BaseModel):
+    id: int
+    user: User
+    post: str

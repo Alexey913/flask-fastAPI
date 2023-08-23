@@ -24,5 +24,11 @@ users = sqlalchemy.Table('users', metadata,
                          sqlalchemy.Column('password',sqlalchemy.String(128)),
                          )
 
+posts = sqlalchemy.Table('posts', metadata,
+                         sqlalchemy.Column('id',sqlalchemy.Integer, primary_key=True),
+                         sqlalchemy.Column('user_id', sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'), nullable=False),
+                         sqlalchemy.Column('post',sqlalchemy.String(1024)),
+                         )
+
 engine = sqlalchemy.create_engine(settings.DATABASE_URL, connect_args={"check_same_thread": False})
 metadata.create_all(engine)
