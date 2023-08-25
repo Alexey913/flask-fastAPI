@@ -44,11 +44,7 @@ class UserIn(BaseModel):
 class User(UserIn):
     id: int
 
-
 users = []
-
-# Динамический шаблон HTML
-
 
 @app.get('/users', response_class=HTMLResponse, summary="Вывод списка пользователей", tags=['HTML'])
 async def get_users(request: Request):
